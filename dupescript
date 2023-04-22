@@ -1,0 +1,375 @@
+if game.PlaceId == 13822889 then
+	local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+	local Window = OrionLib:MakeWindow({Name = "HI BITCH", IntroText = "Loading CHEESE", HidePremium = false, SaveConfig = true, ConfigFolder = "PORNHUB"})
+	
+	OrionLib:MakeNotification({
+		Name = "CHEESE",
+		Content = "FUCK OFF",
+		Image = "rbxassetid://4483345998",
+		Time = 5
+	})
+	
+	loadstring([[
+	function FreeLand()
+		for a,b in pairs(workspace.Properties:GetChildren()) do 
+			if b:FindFirstChild("Owner") and b:FindFirstChild("OriginSquare") and b.Owner.Value == nil then 
+		   wait(1)
+		   game.ReplicatedStorage.PropertyPurchasing.ClientPurchasedProperty:FireServer(b, b.OriginSquare.OriginCFrame.Value.p + Vector3.new(0,3,0))
+		  for i,v in pairs(game.Workspace.Properties:GetChildren()) do
+		   if v.Owner.Value == game.Players.LocalPlayer then
+		  wait(0.1)
+		   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.OriginSquare.CFrame + Vector3.new(0,10,0)
+		  wait(0.1)
+		   game.Players.LocalPlayer.Character.Jump = false
+		  break
+		  end
+		  end
+		  end
+		  end
+		  end
+	]])();
+	
+	function LoadSlot()
+		local LoadSlot = game.ReplicatedStorage.LoadSaveRequests.ClientMayLoad:InvokeServer(player)
+			if LoadSlot then
+				game.ReplicatedStorage.LoadSaveRequests.RequestLoad:InvokeServer(Slot, player)
+			end
+		end
+		
+	
+	local MainTab = Window:MakeTab({
+		Name = "Main",
+		Icon = "rbxassetid://4483345998",
+		PremiumOnly = false
+	})
+	
+	local N=game:GetService("VirtualInputManager")
+	
+	MainTab:AddSlider({
+		Name = "Select Slot to Dupe",
+		Min = 0,
+		Max = 6,
+		Default = 0,
+		Color = Color3.fromRGB(255,0,0),
+		Increment = 1,
+		ValueName = "",
+		Callback = function(new)
+			Slot = tonumber(new)
+		end    
+	})
+	
+	
+	MainTab:AddTextbox({
+		Name = "Enter how long it took to tp to your base (remove 3)",
+		Default = "",
+		TextDisappear = false,
+		Callback = function(new)
+			timetotp = tonumber(new)
+		end	  
+	})
+	
+	MainTab:AddButton({
+		Name = "Dupe land",
+		Callback = function()
+			print("Loading slot")
+			N:SendKeyEvent(true,"Q",false,game)
+			wait(0.1) -- free land
+			N:SendKeyEvent(true,"T",false,game)
+			wait(0.1) -- loads the base
+			N:SendKeyEvent(true,"P",false,game) -- kicks from game
+			LoadSlot()
+		  end    
+	})
+
+	local Section = MainTab:AddSection({
+		Name = "Scripts below not made by me (sort#6910)"
+	})
+
+	MainTab:AddButton({
+		Name = "Stopwatch",
+		Callback = function()
+			-- Monstrum's Gui to Lua\n-- Version: 3.2
+
+-- Instances:
+
+local Stopwatch_GUI = Instance.new("ScreenGui")
+local Stopwatch = Instance.new("Frame")
+local Time = Instance.new("TextLabel")
+local Start = Instance.new("TextButton")
+local Reset = Instance.new("TextButton")
+
+--Properties:
+
+Stopwatch_GUI.Name = "Stopwatch_GUI"
+Stopwatch_GUI.Parent = game.CoreGui
+
+Stopwatch.Name = "Stopwatch"
+Stopwatch.Parent = Stopwatch_GUI
+Stopwatch.Position = UDim2.new(0.904782176, -100, 0.00129532814, 10)
+Stopwatch.Size = UDim2.new(0, 200, 0, 100)
+Stopwatch.Style = Enum.FrameStyle.RobloxRound
+
+Time.Name = "Time"
+Time.Parent = Stopwatch
+Time.Position = UDim2.new(0.5, 0, 0, 10)
+Time.Font = Enum.Font.ArialBold
+Time.Text = "0.000"
+Time.TextColor3 = Color3.fromRGB(255, 255, 255)
+Time.TextSize = 24.000
+
+Start.Name = "Start"
+Start.Parent = Stopwatch
+Start.Position = UDim2.new(0.25, -40, 0.5, 0)
+Start.Size = UDim2.new(0, 80, 0, 50)
+Start.AutoButtonColor = false
+Start.Style = Enum.ButtonStyle.RobloxButton
+Start.Font = Enum.Font.ArialBold
+Start.Text = "Start"
+Start.TextColor3 = Color3.fromRGB(255, 255, 255)
+Start.TextSize = 14.000
+
+Reset.Name = "Reset"
+Reset.Parent = Stopwatch
+Reset.Position = UDim2.new(0.75, -25, 0.5, 0)
+Reset.Size = UDim2.new(0, 60, 0, 50)
+Reset.AutoButtonColor = false
+Reset.Style = Enum.ButtonStyle.RobloxButton
+Reset.Font = Enum.Font.ArialBold
+Reset.Text = "Reset"
+Reset.TextColor3 = Color3.fromRGB(255, 255, 255)
+Reset.TextSize = 14.000
+
+-- Scripts:
+
+local function CCFRDYL_script() -- Stopwatch.Main 
+	local script = Instance.new('LocalScript', Stopwatch)
+
+	local paused = false
+	local running = false
+	local begin = tick()
+	local pauseT = tick()
+	local current = 0
+	
+	local timer = script.Parent
+	local start,reset = timer.Start,timer.Reset
+	
+	function display()
+		local sec = tostring(math.floor(current%60))
+		local mili = tostring(math.floor((current%60)*1000%1000))
+		mili = (#mili == 1 and ("00" .. mili) or #mili == 2 and ("0" .. mili) or mili)
+		script.Parent.Time.Text = (sec .. "." .. mili)
+	end
+	
+	function startTimer(resetT)
+		running,paused = true,false
+		if (resetT) then current = 0 begin = tick() end
+		while (running) do
+			if (not paused) then
+				current = (tick()-begin)
+				display()
+			end
+			wait()
+		end
+	end
+	
+	start.MouseButton1Click:connect(function()
+		if (paused) then
+			local diff = (tick()-pauseT)
+			begin = (begin+diff)
+			start.Text = "Pause"
+			start.Style,reset.Style = 1,1
+			startTimer(false)
+		elseif (running) then
+			paused = true
+			pauseT = tick()
+			start.Text = "Resume"
+			start.Style,reset.Style = 1,1
+		else
+			start.Text = "Pause"
+			start.Style,reset.Style = 1,1
+			startTimer(true)
+		end
+	end)
+	
+	reset.MouseButton1Click:connect(function()
+		running,paused = false,false
+		start.Style,reset.Style = 1,2
+		script.Parent.Time.Text = "0.000"
+		start.Text = "Start"
+	end)
+end
+coroutine.wrap(CCFRDYL_script)()
+		  end    
+	})
+
+
+	
+	--extra functions---------------------------------------------------------
+	
+	scr=getsenv(game.Players.LocalPlayer.PlayerGui.PropertyPurchasingGUI.PropertyPurchasingClient);
+	
+	local player = game.Players.LocalPlayer
+	local mouse = player:GetMouse()
+	
+	
+	
+	bind = "q" 
+	
+	
+	
+	mouse.KeyDown:connect(function(key)
+	if key == bind then
+		repeat wait()until game.Players.LocalPlayer.PlayerGui.PropertyPurchasingGUI.SelectPurchase.Visible;
+		wait(1)
+		wait(0.9)
+		for i,v in next, game:GetService("Workspace").Properties:GetChildren() do
+			if v:FindFirstChild("Owner") and v.Owner.Value == nil then
+			game:GetService("ReplicatedStorage").PropertyPurchasing.ClientPurchasedProperty:FireServer(v,v.OriginSquare.Position)
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.OriginSquare.CFrame + Vector3.new(0,2,0)
+			break
+			end
+		end
+	end
+	end)
+	
+	
+	
+	local player = game.Players.LocalPlayer
+	local mouse = player:GetMouse()
+	
+	
+	
+	bind = "p" 
+	
+	
+	
+	mouse.KeyDown:connect(function(key)
+	if key == bind then
+		repeat wait()until game.Players.LocalPlayer.PlayerGui.PropertyPurchasingGUI.SelectPurchase.Visible;
+		wait(1)
+		wait(2)
+		task.wait(timetotp - 2)
+		loadstring(game:GetObjects("rbxassetid://2662507900")[1].Source)()
+	end
+	end)
+	
+	
+	local player = game.Players.LocalPlayer
+	local mouse = player:GetMouse()
+	
+	
+	
+	bind = "t" 
+	
+	
+	
+	mouse.KeyDown:connect(function(key)
+	if key == bind then
+		repeat wait()until game.Players.LocalPlayer.PlayerGui.PropertyPurchasingGUI.SelectPurchase.Visible;
+		wait(0.3)
+		scr.scrollSelection(-1);
+		wait(0.1)
+		scr.selectionMade();
+		wait(0.3)
+		scr.selectionMade();
+		wait(1)
+		scr.scrollSelection(-1);
+		wait(0.3)
+		scr.selectionMade();
+		wait(0.3)
+		scr.selectionMade();
+		wait(1)
+		scr.scrollSelection(-1);
+		wait(0.3)
+		scr.selectionMade();
+		wait(0.3)
+		scr.selectionMade();
+		wait(1)
+		scr.scrollSelection(-1);
+		wait(0.3)
+		scr.selectionMade();
+		wait(0.3)
+		scr.selectionMade();
+		wait(1)
+		scr.scrollSelection(-1);
+		wait(0.3)
+		scr.selectionMade();
+		wait(0.3)
+		scr.selectionMade();
+		wait(1)
+		scr.scrollSelection(-1);
+		wait(0.3)
+		scr.selectionMade();
+		wait(0.3)
+		scr.selectionMade();
+		wait(1)
+		scr.scrollSelection(-1);
+		wait(0.3)
+		scr.selectionMade();
+		wait(0.3)
+		scr.selectionMade();
+		wait(1)
+		scr.scrollSelection(-1);
+		wait(0.3)
+		scr.selectionMade();
+		wait(0.3)
+		scr.selectionMade();
+		wait(1)
+		scr.scrollSelection(-1);
+		wait(0.3)
+		scr.selectionMade();
+		wait(0.3)
+		scr.selectionMade();
+		wait(1)
+		scr.scrollSelection(-1);
+		wait(0.3)
+		scr.selectionMade();
+		wait(0.3)
+		scr.selectionMade();
+		wait(1)
+		scr.scrollSelection(-1);
+		wait(0.3)
+		scr.selectionMade();
+		wait(0.3)
+		scr.selectionMade();
+		wait(1)
+	scr.scrollSelection(-1);
+	wait(0.3)
+	scr.selectionMade();
+	wait(0.3)
+	scr.selectionMade();
+	wait(1)
+	scr.scrollSelection(-1);
+	wait(0.3)
+	scr.selectionMade();
+	wait(0.3)
+	scr.selectionMade();
+	wait(1)
+	scr.scrollSelection(-1);
+	wait(0.3)
+	scr.selectionMade();
+	wait(0.3)
+	scr.selectionMade();
+	wait(1)
+	scr.scrollSelection(-1);
+	wait(0.3)
+	scr.selectionMade();
+	wait(0.3)
+	scr.selectionMade();
+	wait(1)
+	scr.scrollSelection(-1);
+	wait(0.3)
+	scr.selectionMade();
+	wait(0.3)
+	scr.selectionMade();
+	wait(1)
+	scr.scrollSelection(-1);
+	wait(0.3)
+	scr.selectionMade();
+	wait(0.3)
+	scr.selectionMade();                       
+	end
+	end)
+	
+	end
+	OrionLib:Init()
