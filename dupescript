@@ -82,7 +82,7 @@ if game.PlaceId == 13822889 then
 	})
 
 	local Section = MainTab:AddSection({
-		Name = "Scripts below not made by me (sort#6910)"
+		Name = "Stopwatch"
 	})
 
 	MainTab:AddButton({
