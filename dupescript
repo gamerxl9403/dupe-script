@@ -1,10 +1,10 @@
 if game.PlaceId == 13822889 then
 	local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-	local Window = OrionLib:MakeWindow({Name = "HI BITCH", IntroText = "Loading CHEESE", HidePremium = false, SaveConfig = true, ConfigFolder = "PORNHUB"})
+	local Window = OrionLib:MakeWindow({Name = "CHEESEHUB", IntroText = "Loading CHEESE", HidePremium = false, SaveConfig = true, ConfigFolder = "CHEESEHUB"})
 	
 	OrionLib:MakeNotification({
 		Name = "CHEESE",
-		Content = "FUCK OFF",
+		Content = "CHEESE",
 		Image = "rbxassetid://4483345998",
 		Time = 5
 	})
